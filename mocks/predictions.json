@@ -1,0 +1,11 @@
+[
+    {
+      "match": "Lech Poznań vs Legia Warszawa",
+      "date": "2025-07-27",
+      "probabilities": {
+        "homeWin": 0.42,
+        "draw": 0.31,
+        "awayWin": 0.27
+      }
+    }
+  ]
