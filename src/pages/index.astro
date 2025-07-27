@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const filePath = path.resolve("./public/predictions.json");
+const filePath = path.resolve("./mocks/predictions.json");
 const file = await fs.readFile(filePath, "utf-8");
 const predictions = JSON.parse(file);
 
