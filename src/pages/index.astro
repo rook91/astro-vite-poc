@@ -1,11 +1,37 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import fs from "node:fs/promises";
+import path from "node:path";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const filePath = path.resolve("./public/predictions.json");
+const file = await fs.readFile(filePath, "utf-8");
+const predictions = JSON.parse(file);
+
+function percent(v) {
+  return `${(v * 100).toFixed(1)}%`;
+}
 ---
-
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Przewidywania Ekstraklasy">
+  {predictions.map(pred => (
+    <div class="bg-white p-4 shadow-md rounded-lg mb-4">
+      <h2 class="text-xl font-bold">{pred.match}</h2>
+      <p class="text-sm text-gray-500">
+        {new Date(pred.date).toLocaleDateString("pl-PL")}
+      </p>
+      <div class="mt-2 grid grid-cols-3 gap-2 text-center">
+        <div>
+          <div class="font-medium text-green-600">Gospodarz</div>
+          <div>{percent(pred.probabilities.homeWin)}</div>
+        </div>
+        <div>
+          <div class="font-medium text-yellow-600">Remis</div>
+          <div>{percent(pred.probabilities.draw)}</div>
+        </div>
+        <div>
+          <div class="font-medium text-red-600">Gość</div>
+          <div>{percent(pred.probabilities.awayWin)}</div>
+        </div>
+      </div>
+    </div>
+  ))}
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+const { title = "Strona" } = Astro.props;
+---
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900 min-h-screen">
+    <main class="max-w-3xl mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-6 text-center">{title}</h1>
+      <slot />
+    </main>
+  </body>
+</html>
